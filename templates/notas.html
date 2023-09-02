@@ -1,0 +1,63 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+          
+        
+            <!-- Outer Row -->
+            <div class="row justify-content-center">
+        
+                <div class="col-xl-10 col-lg-12 col-md-9">
+        
+                    <div class="card o-hidden border-2 my-1">
+                        <div class="card-body p-0">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">NOTAS GENERALES</h1>
+                                    </div>
+                                    <form class="user" action="listadopersonal" method="POST">    
+                                        <div class="d-flex gap-2">                        
+                                            
+                                        </div>
+                                        <div class="container">
+                                            <div class="row justify-content-center">
+                                        
+                                                <div class="col-xl-10 col-lg-12 col-md-9">
+                                        
+                                                    <div class="card o-hidden border-1 my-1">
+                                                        <div class="card-body p-0">
+                                                            <div class="p-3">
+                                                               
+                                                                <table id="usuarios2" class="table table-hover">
+                                                                    
+                                                                    <tbody id="listado1"></tbody>
+                                                                    <tbody id="listado2"></tbody>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <script>
+                                        
+                                            window.onload = function () {
+                                                vernotas();
+                                                verpromedio();
+
+                                            }
+                                        </script>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+    
+    
+{% endblock %}

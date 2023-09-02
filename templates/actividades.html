@@ -1,0 +1,98 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Gestion de Actividades</h1>
+                            </div>
+                            <form class="user" action="/agregaractividad" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0 mb-3">
+                                        <select class="form-select" aria-label="Default select example" id="rol" name="materia" required>
+                                            <option value="" selected>Seleccione Seleccione Materia</option>
+                                            {% for user in datosmatind %}
+                                            <option value="{{user['id_materia']}}">{{user['nombre_materia']}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user mb-3" id="nombre1"
+                                            name="actividad" placeholder="Actividad" required>
+                                        <input id="docente" name="docente" type="hidden" value="{{ session['id_usuario'] }}">
+
+                                    </div>
+                                                                      
+                                </div>
+                                                                
+
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary" type="submit" >Crear Actividad</button>
+                                    <button class="btn btn-danger" type="button"
+                                        onclick="vercancelar()">Cancelar</button>
+                                </div>
+                            </form>
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-dismissible alert-warning">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                <h4 class="alert-heading">Mensaje:</h4>
+                                <p class="mb-0"> {{ message }} </p>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+                       
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Codigo Actividad</th>
+                                    <th>Nombre Actividad</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        veractividad();
+    }
+</script>
+
+{% endblock %}

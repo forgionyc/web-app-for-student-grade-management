@@ -1,0 +1,46 @@
+{% extends 'base2.html' %}
+{% block content %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <img src="/static/img/escudo-unacional.png" width="350">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="login-wrap p-0">
+              
+              <!-- <form action="/menu" class="signin-form" > -->
+                <form action="/validacionlogin" method="post">
+                  <div class="form-group">
+                      <input type="text" class="form-control" name="usuario" placeholder="Usuario" required>
+                  </div>
+            <div class="form-group">
+              <input id="password-field" type="password" class="form-control" name="contrasena" placeholder="Contraseña" required>
+              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="form-control btn btn-primary submit px-3">INGRESAR</button>
+            </div>
+            
+          </form>          
+          {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    
+                    <div class="alert alert-dismissible alert-info">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      <h4 class="alert-heading">Ingreso a la Plataforma</h4>
+                      <p class="mb-0">{{message}}</a>.</p>
+                    </div>
+                    
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+          </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}    

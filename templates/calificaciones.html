@@ -1,0 +1,132 @@
+{% extends 'menu.html' %}
+
+{% block content1 %}
+<div onshow="cargarInfo();" class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-2 my-1">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Gestion de Calificaciones</h1>
+                            </div>
+                            <form class="user" action="/agregarcalificacion" method="POST">
+                                
+                                <div class="form-group row">
+                                                                           
+                                    <div class="col-sm-6 mb-3 mb-sm-0 mb-3"> 
+                                        <select class="form-select" aria-label="Default select example" id="materia" name="materia" required>
+                                            <option value="" selected>Seleccione Materia</option>
+                                            {% for user in datosmatind %}
+                                            <option value="{{user['id_materia']}}">{{user['nombre_materia']}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mb-3">
+                                            <select class="form-select mb-3" aria-label="Default select example" id="estudiante" name="estudiante" required>
+                                                <option value="" selected>Seleccione Estudiante</option>
+                                                {% for user in datosestudiante %}
+                                                <option value="{{user['id_usuario']}}">{{user['nombre']}} {{user['apellido']}}</option>
+                                                {% endfor %}                                                                                           
+                                            </select>
+                                            
+
+                                   
+                                </div>
+                            </div>  
+                            
+
+                                <div class="form-group row">
+                                   
+                                 
+                                        <div class="col-sm-6 mb-3 mb-sm-0 mb-3">
+                                            <select class="form-select mb-3" aria-label="Default select example" id="actividad" name="actividad" required>
+                                                <option value="" selected>Seleccione Actividad</option>
+                                                {% for user in datosactvind %}
+                                            <option value="{{user['id_actividad']}}">{{user['nombre_actividad']}}</option>
+                                            {% endfor %}                                                                                            
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user mb-3" id="nota"
+                                                name="nota" placeholder="Calificacion" required>
+                                        </div>
+                           
+                                                                   
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control" id="exampleTextarea" name="retro" rows="2" placeholder="Retroalimentación" required></textarea>
+                                  </div>
+                                  <input id="docente" name="docente" type="hidden" value="{{ session['id_usuario'] }}">
+                               
+                                                        
+
+                                <div class="d-flex gap-2">
+                                    <button id="boton-accion" class="btn btn-primary" type="submit">Calificar</button>
+                                    <button class="btn btn-danger" type="button"
+                                        onclick="vercancelar()">Cancelar</button>
+                                </div>
+                            </form>
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-dismissible alert-warning">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                <h4 class="alert-heading">Mensaje:</h4>
+                                <p class="mb-0"> {{ message }} </p>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-1 my-1">
+                <div class="card-body p-0">
+                    <div class="p-3">
+                       
+                        <table id="usuarios2" class="table">
+                            <thead>
+                                <tr class="table-success">
+                                    <th>NOMBRES</th>
+                                    <th>APELLIDOS</th>
+                                    <th>MATERIAS</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody id="listado"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    window.onload = function () {
+        verestudiantesmatri();
+    }
+</script>
+{% endblock %}
